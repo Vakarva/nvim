@@ -1,12 +1,15 @@
 return {
     'stevearc/oil.nvim',
     ---@module 'oil'
-    ---@type oil.SetupOpts
+    ---@type oil.SetupOpt
+    dependencies = { { 'echasnovski/mini.icons', opts = {} } },
     keys = {
         { '-', '<CMD>Oil<CR>', desc = 'Open parent directory' },
         { '<leader>-', function() require('oil').toggle_float() end,
         desc = 'Toggle oil floating window' },
     },
+    -- Lazy loading not recommended because very tricky to make it work correctly in all situations
+    lazy = false,
     opts = {
         view_options = {
             show_hidden = true,
@@ -16,8 +19,4 @@ return {
             end,
         }
     },
-    -- Optional dependencies
-    dependencies = { { 'echasnovski/mini.icons', opts = {} } },
-    -- Lazy loading is not recommended because it is very tricky to make it work correctly in all situations.
-    lazy = false,
 }

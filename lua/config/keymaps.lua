@@ -1,3 +1,13 @@
+-- Diagnostics
+vim.keymap.set('n', '<leader>xl', function()
+  if vim.fn.getloclist(0, {winid=0}).winid ~= 0 then
+    vim.cmd.lclose()
+  else
+    vim.diagnostic.setloclist()
+    vim.cmd.lopen()
+  end
+end, { desc = 'Toggle diagnostics' })
+
 -- Move lines up/down in visual mode
 vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", { desc = 'Move selection down' })
 vim.keymap.set('v', 'K', ":m ,'<-2<CR>gv=gv", { desc = 'Move selection up' })
