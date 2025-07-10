@@ -16,7 +16,9 @@ return {
 		local lspconfig = require('lspconfig')
 		lspconfig.bashls.setup({})
 		lspconfig.cssls.setup({})
-		lspconfig.docker_compose_language_serve.setup({})
+		lspconfig.docker_compose_language_service.setup({
+			filetypes = { 'yaml.docker-compose', 'yaml' },
+		})
 		lspconfig.dockerls.setup({})
 		lspconfig.html.setup({})
 		lspconfig.jsonls.setup({})
