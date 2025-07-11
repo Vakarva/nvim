@@ -47,18 +47,22 @@ return {
 		vim.api.nvim_create_autocmd('LspAttach', {
 			callback = function(e)
 				local opts = { buffer = e.buf }
-				vim.keymap.set('n', 'grr', function()
-					require('telescope.builtin').lsp_references()
-				end, vim.tbl_extend('force', opts, { desc = 'Find References (Telescope)' }))
-				vim.keymap.set('n', '<leader>ws', function()
-					require('telescope.builtin').lsp_dynamic_workspace_symbols()
-				end, vim.tbl_extend('force', opts, { desc = 'Dynamic Workspace Symbols' }))
+				vim.keymap.set('n', 'gd', function()
+					require('telescope.builtin').lsp_definitions({ reuse_win = true })
+				end, opts, { desc = 'Goto Definition (Telescope)' })
 				vim.keymap.set(
 					'n',
-					'<leader>ds',
-					'<cmd>Telescope lsp_document_symbols<cr>',
-					vim.tbl_extend('force', opts, { desc = 'Document Symbols' })
+					'gr',
+					'<cmd>Telescope lsp_references<cr>',
+					opts,
+					{ desc = 'Find References (Telescope)', nowait = true }
 				)
+				vim.keymap.set('n', 'gI', function()
+					require('telescope.builtin').lsp_implementations({ reuse_win = true })
+				end, opts, { desc = 'Goto [I]mplementation (Telescope)' })
+				vim.keymap.set('n', 'gy', function()
+					require('telescope.builtin').lsp_type_definitions({ reuse_win = true })
+				end, opts, { desc = 'Goto T[y]pe Definition (Telescope)' })
 			end,
 		})
 

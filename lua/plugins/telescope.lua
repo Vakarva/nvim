@@ -1,6 +1,6 @@
 return {
 	'nvim-telescope/telescope.nvim',
-	tag = '0.1.8',
+	cmd = 'Telescope',
 	dependencies = { 'nvim-lua/plenary.nvim' },
 	keys = {
 		{ '<leader>fd', '<cmd>Telescope find_files<cr>', desc = 'Telescope find files' },
@@ -12,4 +12,10 @@ return {
 		{ '<leader>fr', '<cmd>Telescope oldfiles<cr>', desc = 'Telescope recent files' },
 		{ '<leader>fc', '<cmd>Telescope colorscheme<cr>', desc = 'Telescope colorschemes' },
 	},
+	opts = {
+		defaults = {
+			default_text = '', -- bug that causes 'A' to prepopulate searches
+		},
+	},
+	tag = '0.1.8',
 }
