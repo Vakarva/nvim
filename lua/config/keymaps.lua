@@ -26,9 +26,6 @@ end, { desc = 'Last diagnostic' })
 
 -- Formatting and utility
 vim.keymap.set('n', 'Q', '<nop>', { desc = 'Disable Ex mode' })
-vim.keymap.set({ 'n', 'v' }, '<leader>f', function()
-	require('conform').format({ bufnr = 0 })
-end, { desc = 'Format buffer with conform' })
 
 -- Indenting
 vim.keymap.set('v', '<', '<gv', { desc = 'Indent left and reselect' })
