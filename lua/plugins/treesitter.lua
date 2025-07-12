@@ -31,7 +31,7 @@ return {
 			'regex',
 			'scss',
 			'ssh_config',
-			'sqlfluff',
+			'sql',
 			'toml',
 			'tsx',
 			'typescript',
