@@ -2,9 +2,11 @@ return {
 	'mason-org/mason-lspconfig.nvim',
 	dependencies = {
 		'mason-org/mason.nvim',
-		'neovim/nvim-lspconfig',
 	},
 	opts = {
+		automatic_enable = {
+			exclude = { 'docker_compose_language_service', 'vtsls' },
+		},
 		ensure_installed = {
 			'bashls',
 			'cssls',

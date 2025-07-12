@@ -6,25 +6,10 @@ return {
 		'j-hui/fidget.nvim',
 	},
 	config = function()
-		local lspconfig_defaults = require('lspconfig').util.default_config
-		lspconfig_defaults.capabilities = vim.tbl_deep_extend(
-			'force',
-			lspconfig_defaults.capabilities,
-			require('cmp_nvim_lsp').default_capabilities()
-		)
-
-		local lspconfig = require('lspconfig')
-		lspconfig.bashls.setup({})
-		lspconfig.cssls.setup({})
-		lspconfig.docker_compose_language_service.setup({
+		vim.lsp.config('docker_compose_language_service', {
 			filetypes = { 'yaml.docker-compose', 'yaml' },
 		})
-		lspconfig.dockerls.setup({})
-		lspconfig.html.setup({})
-		lspconfig.jsonls.setup({})
-		lspconfig.lua_ls.setup({})
-		lspconfig.pyright.setup({})
-		lspconfig.vtsls.setup({
+		vim.lsp.config('vtsls', {
 			settings = {
 				complete_function_calls = true,
 				vtsls = {
@@ -42,28 +27,28 @@ return {
 				},
 			},
 		})
-		lspconfig.yamlls.setup({})
+		vim.lsp.enable({ 'docker_compose_language_service', 'vtsls' })
 
 		vim.api.nvim_create_autocmd('LspAttach', {
 			callback = function(e)
 				local telescope = require('telescope.builtin')
-				local opts = { buffer = e.buf }
+				local keymapOpts = { buffer = e.buf }
 				vim.keymap.set('n', 'gd', function()
 					telescope.lsp_definitions({ reuse_win = true })
-				end, opts, { desc = 'Goto Definition (Telescope)' })
+				end, keymapOpts, { desc = 'Goto Definition (Telescope)' })
 				vim.keymap.set(
 					'n',
 					'gr',
 					'<cmd>Telescope lsp_references<cr>',
-					opts,
+					keymapOpts,
 					{ desc = 'Find References (Telescope)', nowait = true }
 				)
 				vim.keymap.set('n', 'gI', function()
 					telescope.lsp_implementations({ reuse_win = true })
-				end, opts, { desc = 'Goto [I]mplementation (Telescope)' })
+				end, keymapOpts, { desc = 'Goto [I]mplementation (Telescope)' })
 				vim.keymap.set('n', 'gy', function()
 					telescope.lsp_type_definitions({ reuse_win = true })
-				end, opts, { desc = 'Goto T[y]pe Definition (Telescope)' })
+				end, keymapOpts, { desc = 'Goto T[y]pe Definition (Telescope)' })
 			end,
 		})
 
