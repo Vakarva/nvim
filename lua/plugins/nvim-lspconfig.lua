@@ -2,7 +2,7 @@ return {
 	'neovim/nvim-lspconfig',
 	dependencies = {
 		'mason-org/mason-lspconfig.nvim',
-		'hrsh7th/cmp-nvim-lsp',
+		'saghen/blink.cmp',
 		'j-hui/fidget.nvim',
 	},
 	config = function()
