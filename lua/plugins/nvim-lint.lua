@@ -9,6 +9,7 @@ return {
 			javascript = { 'eslint_d' },
 			typescript = { 'eslint_d' },
 			javascriptreact = { 'eslint_d' },
+			sql = { 'sqruff' },
 			typescriptreact = { 'eslint_d' },
 		}
 
