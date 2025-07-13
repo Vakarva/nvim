@@ -81,31 +81,17 @@ return {
 			builtin.find_files({ hidden = true, default_text = line })
 		end
 
-		local function find_command()
-			if 1 == vim.fn.executable('rg') then
-				return { 'rg', '--files', '--color', 'never', '-g', '!.git' }
-			elseif 1 == vim.fn.executable('fd') then
-				return { 'fd', '--type', 'f', '--color', 'never', '-E', '.git' }
-			elseif 1 == vim.fn.executable('fdfind') then
-				return { 'fdfind', '--type', 'f', '--color', 'never', '-E', '.git' }
-			elseif 1 == vim.fn.executable('find') and vim.fn.has('win32') == 0 then
-				return { 'find', '.', '-type', 'f' }
-			elseif 1 == vim.fn.executable('where') then
-				return { 'where', '/r', '.', '*' }
-			end
-		end
-
 		return {
 			defaults = {
 				default_text = '', -- bug that causes 'a' to prepopulate searches
-				-- open files in the first window that is an actual file.
+				-- open files in the first window that is an actual file or is an oil filetype.
 				-- use the current window if no other window is available.
 				get_selection_window = function()
 					local wins = vim.api.nvim_list_wins()
 					table.insert(wins, 1, vim.api.nvim_get_current_win())
 					for _, win in ipairs(wins) do
 						local buf = vim.api.nvim_win_get_buf(win)
-						if vim.bo[buf].buftype == '' then
+						if vim.bo[buf].buftype == '' or vim.bo[buf].filetype == 'oil' then
 							return win
 						end
 					end
@@ -124,12 +110,6 @@ return {
 					},
 					n = {
 						['q'] = actions.close,
-					},
-				},
-				pickers = {
-					find_files = {
-						find_command = find_command,
-						hidden = true,
 					},
 				},
 			},
