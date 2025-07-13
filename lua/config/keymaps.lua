@@ -9,20 +9,22 @@ vim.keymap.set('n', '<leader>Y', '"+Y', { desc = 'Yank line to system clipboard'
 vim.keymap.set({ 'n', 'v' }, '<leader>d', '"_d', { desc = 'Delete to void register' })
 
 -- Diagnostics
-vim.keymap.set('n', '<leader>xl', function()
-	if vim.fn.getloclist(0, { winid = 0 }).winid ~= 0 then
-		vim.cmd.lclose()
-	else
-		vim.diagnostic.setloclist()
-		vim.cmd.lopen()
+local diagnostic_goto = function(next, severity)
+	local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
+	severity = severity and vim.diagnostic.severity[severity] or nil
+	return function()
+		go({ severity = severity })
 	end
-end, { desc = 'Toggle diagnostics' })
-vim.keymap.set('n', '[D', function()
-	vim.diagnostic.jump({ count = -math.huge })
-end, { desc = 'First diagnostic' })
-vim.keymap.set('n', ']D', function()
-	vim.diagnostic.jump({ count = math.huge })
-end, { desc = 'Last diagnostic' })
+end
+vim.keymap.set('n', '<leader>cd', vim.diagnostic.open_float, { desc = 'Line Diagnostics' })
+vim.keymap.set('n', ']d', diagnostic_goto(true), { desc = 'Next Diagnostic' })
+vim.keymap.set('n', '[d', diagnostic_goto(false), { desc = 'Prev Diagnostic' })
+vim.keymap.set('n', ']e', diagnostic_goto(true, 'ERROR'), { desc = 'Next Error' })
+vim.keymap.set('n', '[e', diagnostic_goto(false, 'ERROR'), { desc = 'Prev Error' })
+vim.keymap.set('n', ']w', diagnostic_goto(true, 'WARN'), { desc = 'Next Warning' })
+vim.keymap.set('n', '[w', diagnostic_goto(false, 'WARN'), { desc = 'Prev Warning' })
+
+-- Location and quickfix list
 
 -- Formatting and utility
 vim.keymap.set('n', 'Q', '<nop>', { desc = 'Disable Ex mode' })
@@ -31,11 +33,13 @@ vim.keymap.set('n', 'Q', '<nop>', { desc = 'Disable Ex mode' })
 vim.keymap.set('v', '<', '<gv', { desc = 'Indent left and reselect' })
 vim.keymap.set('v', '>', '>gv', { desc = 'Indent right and reselect' })
 
--- Location list navigation
-vim.keymap.set('n', ']l', '<cmd>lnext<CR>zz', { desc = 'Next location item, center' })
-vim.keymap.set('n', '[l', '<cmd>lprev<CR>zz', { desc = 'Prev location item, center' })
-vim.keymap.set('n', ']L', '<cmd>llast<CR>zz', { desc = 'Last location item, center' })
-vim.keymap.set('n', '[L', '<cmd>lfirst<CR>zz', { desc = 'First location item, center' })
+-- Location list
+vim.keymap.set('n', '<leader>xl', function()
+	local success, err = pcall(vim.fn.getloclist(0, { winid = 0 }).winid ~= 0 and vim.cmd.lclose or vim.cmd.lopen)
+	if not success and err then
+		vim.notify(err, vim.log.levels.ERROR)
+	end
+end, { desc = 'Location List' })
 
 -- Move lines up/down with Alt+j/k (works across all modes)
 local move_opts = { noremap = true, silent = true }
@@ -54,11 +58,15 @@ vim.keymap.set('n', 'n', 'nzzzv', { desc = 'Next search result, center and unfol
 vim.keymap.set('n', 'N', 'Nzzzv', { desc = 'Prev search result, center and unfold' })
 vim.keymap.set('n', '=ap', "ma=ap'a", { desc = 'Format paragraph and restore cursor' })
 
--- Quickfix and location list navigation
-vim.keymap.set('n', ']q', '<cmd>cnext<CR>zz', { desc = 'Next quickfix item, center' })
-vim.keymap.set('n', '[q', '<cmd>cprev<CR>zz', { desc = 'Prev quickfix item, center' })
-vim.keymap.set('n', ']Q', '<cmd>clast<CR>zz', { desc = 'Last quickfix item, center' })
-vim.keymap.set('n', '[Q', '<cmd>cfirst<CR>zz', { desc = 'First quickfix item, center' })
+-- Quickfix
+vim.keymap.set('n', '<leader>xq', function()
+	local success, err = pcall(vim.fn.getqflist({ winid = 0 }).winid ~= 0 and vim.cmd.cclose or vim.cmd.copen)
+	if not success and err then
+		vim.notify(err, vim.log.levels.ERROR)
+	end
+end, { desc = 'Quickfix List' })
+vim.keymap.set('n', '[q', vim.cmd.cprev, { desc = 'Previous Quickfix' })
+vim.keymap.set('n', ']q', vim.cmd.cnext, { desc = 'Next Quickfix' })
 
 -- Text manipulation
 vim.keymap.set(
