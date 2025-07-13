@@ -49,13 +49,12 @@ vim.keymap.set('n', '<leader>xl', function()
 end, { desc = 'Location List' })
 
 -- Move lines up/down with Alt+j/k (works across all modes)
-local move_opts = { noremap = true, silent = true }
-vim.keymap.set('n', '<A-j>', ':m .+1<CR>==', vim.tbl_extend('force', move_opts, { desc = 'Move line down' }))
-vim.keymap.set('n', '<A-k>', ':m .-2<CR>==', vim.tbl_extend('force', move_opts, { desc = 'Move line up' }))
-vim.keymap.set('i', '<A-j>', '<Esc>:m .+1<CR>==gi', vim.tbl_extend('force', move_opts, { desc = 'Move line down' }))
-vim.keymap.set('i', '<A-k>', '<Esc>:m .-2<CR>==gi', vim.tbl_extend('force', move_opts, { desc = 'Move line up' }))
-vim.keymap.set('v', '<A-j>', ":m '>+1<CR>gv=gv", vim.tbl_extend('force', move_opts, { desc = 'Move selection down' }))
-vim.keymap.set('v', '<A-k>', ":m '<-2<CR>gv=gv", vim.tbl_extend('force', move_opts, { desc = 'Move selection up' }))
+vim.keymap.set('n', '<A-j>', "<cmd>execute 'move .+' . v:count1<cr>==", { desc = 'Move Down' })
+vim.keymap.set('n', '<A-k>', "<cmd>execute 'move .-' . (v:count1 + 1)<cr>==", { desc = 'Move Up' })
+vim.keymap.set('i', '<A-j>', '<esc><cmd>m .+1<cr>==gi', { desc = 'Move Down' })
+vim.keymap.set('i', '<A-k>', '<esc><cmd>m .-2<cr>==gi', { desc = 'Move Up' })
+vim.keymap.set('v', '<A-j>', ":<C-u>execute \"'<,'>move '>+\" . v:count1<cr>gv=gv", { desc = 'Move Down' })
+vim.keymap.set('v', '<A-k>', ":<C-u>execute \"'<,'>move '<-\" . (v:count1 + 1)<cr>gv=gv", { desc = 'Move Up' })
 
 -- Navigation and scrolling improvements
 vim.keymap.set('n', 'J', 'mzJ`z', { desc = 'Join lines without moving cursor' })
@@ -91,12 +90,12 @@ vim.keymap.set(
 	[[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
 	{ desc = 'Search and replace word under cursor' }
 )
-vim.keymap.set('n', '<leader>x', '<cmd>!chmod +x %<CR>', { silent = true, desc = 'Make current file executable' })
+-- vim.keymap.set('n', '<leader>x', '<cmd>!chmod +x %<CR>', { silent = true, desc = 'Make current file executable' })
 
 -- Undo break-points
-vim.keymap.set('i', ',', ',<c-g>u')
-vim.keymap.set('i', '.', '.<c-g>u')
-vim.keymap.set('i', ';', ';<c-g>u')
+vim.keymap.set('i', ',', ',<C-g>u')
+vim.keymap.set('i', '.', '.<C-g>u')
+vim.keymap.set('i', ';', ';<C-g>u')
 
 -- Windows
 vim.keymap.set('n', '<leader>-', '<C-W>s', { desc = 'Split Window Below', remap = true })
