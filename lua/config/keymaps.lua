@@ -1,12 +1,18 @@
 -- Buffer navigation
-vim.keymap.set('n', ']b', '<cmd>bnext<CR>', { desc = 'Next buffer' })
 vim.keymap.set('n', '[b', '<cmd>bprevious<CR>', { desc = 'Previous buffer' })
+vim.keymap.set('n', ']b', '<cmd>bnext<CR>', { desc = 'Next buffer' })
+vim.keymap.set('n', '<leader>bb', '<cmd>e #<cr>', { desc = 'Switch to Other Buffer' })
+vim.keymap.set('n', '<leader>bD', '<cmd>:bd<cr>', { desc = 'Delete Buffer and Window' })
 
 -- Clipboard and register management
 vim.keymap.set('x', '<leader>p', '"_dP', { desc = 'Paste without overwriting register' })
 vim.keymap.set({ 'n', 'v' }, '<leader>y', '"+y', { desc = 'Yank to system clipboard' })
 vim.keymap.set('n', '<leader>Y', '"+Y', { desc = 'Yank line to system clipboard' })
 vim.keymap.set({ 'n', 'v' }, '<leader>d', '"_d', { desc = 'Delete to void register' })
+
+-- Comments
+vim.keymap.set('n', 'gco', 'o<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>', { desc = 'Add Comment Below' })
+vim.keymap.set('n', 'gcO', 'O<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>', { desc = 'Add Comment Above' })
 
 -- Diagnostics
 local diagnostic_goto = function(next, severity)
@@ -24,14 +30,15 @@ vim.keymap.set('n', '[e', diagnostic_goto(false, 'ERROR'), { desc = 'Prev Error'
 vim.keymap.set('n', ']w', diagnostic_goto(true, 'WARN'), { desc = 'Next Warning' })
 vim.keymap.set('n', '[w', diagnostic_goto(false, 'WARN'), { desc = 'Prev Warning' })
 
--- Location and quickfix list
-
--- Formatting and utility
+-- Disable
 vim.keymap.set('n', 'Q', '<nop>', { desc = 'Disable Ex mode' })
 
 -- Indenting
 vim.keymap.set('v', '<', '<gv', { desc = 'Indent left and reselect' })
 vim.keymap.set('v', '>', '>gv', { desc = 'Indent right and reselect' })
+
+-- Keywordprg
+vim.keymap.set('n', '<leader>K', '<cmd>norm! K<cr>', { desc = 'Keywordprg' })
 
 -- Location list
 vim.keymap.set('n', '<leader>xl', function()
@@ -68,6 +75,15 @@ end, { desc = 'Quickfix List' })
 vim.keymap.set('n', '[q', vim.cmd.cprev, { desc = 'Previous Quickfix' })
 vim.keymap.set('n', ']q', vim.cmd.cnext, { desc = 'Next Quickfix' })
 
+-- Tabs
+vim.keymap.set('n', '<leader><tab>l', '<cmd>tablast<cr>', { desc = 'Last Tab' })
+vim.keymap.set('n', '<leader><tab>o', '<cmd>tabonly<cr>', { desc = 'Close Other Tabs' })
+vim.keymap.set('n', '<leader><tab>f', '<cmd>tabfirst<cr>', { desc = 'First Tab' })
+vim.keymap.set('n', '<leader><tab><tab>', '<cmd>tabnew<cr>', { desc = 'New Tab' })
+vim.keymap.set('n', '<leader><tab>]', '<cmd>tabnext<cr>', { desc = 'Next Tab' })
+vim.keymap.set('n', '<leader><tab>d', '<cmd>tabclose<cr>', { desc = 'Close Tab' })
+vim.keymap.set('n', '<leader><tab>[', '<cmd>tabprevious<cr>', { desc = 'Previous Tab' })
+
 -- Text manipulation
 vim.keymap.set(
 	'n',
@@ -77,8 +93,20 @@ vim.keymap.set(
 )
 vim.keymap.set('n', '<leader>x', '<cmd>!chmod +x %<CR>', { silent = true, desc = 'Make current file executable' })
 
--- Window navigation
+-- Undo break-points
+vim.keymap.set('i', ',', ',<c-g>u')
+vim.keymap.set('i', '.', '.<c-g>u')
+vim.keymap.set('i', ';', ';<c-g>u')
+
+-- Windows
+vim.keymap.set('n', '<leader>-', '<C-W>s', { desc = 'Split Window Below', remap = true })
+vim.keymap.set('n', '<leader>|', '<C-W>v', { desc = 'Split Window Right', remap = true })
+vim.keymap.set('n', '<leader>wd', '<C-W>c', { desc = 'Delete Window', remap = true })
 vim.keymap.set('n', '<C-h>', '<C-w>h', { desc = 'Move to left window' })
 vim.keymap.set('n', '<C-j>', '<C-w>j', { desc = 'Move to down window' })
 vim.keymap.set('n', '<C-k>', '<C-w>k', { desc = 'Move to up window' })
 vim.keymap.set('n', '<C-l>', '<C-w>l', { desc = 'Move to right window' })
+vim.keymap.set('n', '<C-Up>', '<cmd>resize +2<cr>', { desc = 'Increase Window Height' })
+vim.keymap.set('n', '<C-Down>', '<cmd>resize -2<cr>', { desc = 'Decrease Window Height' })
+vim.keymap.set('n', '<C-Left>', '<cmd>vertical resize -2<cr>', { desc = 'Decrease Window Width' })
+vim.keymap.set('n', '<C-Right>', '<cmd>vertical resize +2<cr>', { desc = 'Increase Window Width' })
