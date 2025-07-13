@@ -32,6 +32,10 @@ vim.opt.updatetime = 50 -- Faster completion and updates (ms)
 vim.opt.hlsearch = false -- Don't highlight search results
 vim.opt.incsearch = true -- Show matches while typing search
 
+-- Windows
+vim.opt.splitright = true -- New vertical splits open to the right
+vim.opt.splitbelow = true -- New horizontal splits open below
+
 -- Filetype-Specific Settings
 -- Git commit messages: 50-character subject, 72-character body
 vim.api.nvim_create_autocmd('FileType', {
