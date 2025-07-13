@@ -13,9 +13,12 @@ return {
 			desc = 'Toggle oil floating window',
 		},
 	},
-	-- Lazy loading not recommended because very tricky to make it work correctly in all situations
 	lazy = false,
 	opts = {
+		keymaps = {
+			['<C-h>'] = false,
+			['<C-l>'] = false,
+		},
 		view_options = {
 			show_hidden = true,
 			is_always_hidden = function(name, _)
