@@ -44,7 +44,7 @@ return {
 			'python',
 			'query',
 			'regex',
-			'rest',
+			'rst',
 			'scss',
 			'ssh_config',
 			'sql',
