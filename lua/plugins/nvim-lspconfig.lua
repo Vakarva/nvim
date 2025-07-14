@@ -6,9 +6,11 @@ return {
 		'j-hui/fidget.nvim',
 	},
 	config = function()
+		-- Docker compose
 		vim.lsp.config('docker_compose_language_service', {
 			filetypes = { 'yaml.docker-compose', 'yaml' },
 		})
+		-- Typescript
 		vim.lsp.config('vtsls', {
 			settings = {
 				complete_function_calls = true,
@@ -24,6 +26,14 @@ return {
 				typescript = {
 					updateImportsOnFileMove = { enabled = 'always' },
 					suggest = { completeFunctionCalls = true },
+					inlayHints = {
+						enumMemberValues = { enabled = true },
+						functionLikeReturnTypes = { enabled = true },
+						parameterNames = { enabled = 'literals' },
+						parameterTypes = { enabled = true },
+						propertyDeclarationTypes = { enabled = true },
+						variableTypes = { enabled = false },
+					},
 				},
 			},
 		})
