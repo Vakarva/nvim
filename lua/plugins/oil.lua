@@ -19,6 +19,9 @@ return {
 			['<C-h>'] = false,
 			['<C-l>'] = false,
 		},
+		lsp_file_methods = {
+			autosave_changes = true,
+		},
 		view_options = {
 			show_hidden = true,
 			is_always_hidden = function(name, _)
