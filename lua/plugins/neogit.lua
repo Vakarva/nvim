@@ -7,6 +7,6 @@ return {
 	},
 	config = true,
 	keys = {
-		{ '<leader>gs', '<cmd>Neogit<cr>', desc = 'Neogit Status' },
+		{ '<leader>gn', '<cmd>Neogit<cr>', desc = 'Neogit Status' },
 	},
 }
