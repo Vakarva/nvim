@@ -23,16 +23,13 @@ return {
 		'vue',
 	},
 	workspace_required = true,
-
-	root_markers = function(bufnr)
+	root_dir = function(bufnr, on_dir)
 		local fname = vim.api.nvim_buf_get_name(bufnr)
 		local root_files = { 'biome.json', 'biome.jsonc' }
-
 		local package_json = vim.fs.find('package.json', {
 			path = fname,
 			upward = true,
 		})[1]
-
 		if package_json then
 			local ok, content = pcall(vim.fn.readfile, package_json)
 			if ok and vim.fn.join(content, '\n'):find('"biome"') then
@@ -40,6 +37,8 @@ return {
 			end
 		end
 
-		return root_files
+		local root_dir = vim.fs.dirname(vim.fs.find(root_files, { path = fname, upward = true })[1])
+		on_dir(root_dir)
+	end,
 	end,
 }
