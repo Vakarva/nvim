@@ -22,7 +22,23 @@ return {
 		'typescriptreact',
 		'vue',
 	},
-	workspace_required = true,
+	on_attach = function(client, bufnr)
+		if client.name == 'biome' then
+			vim.api.nvim_create_autocmd('BufWritePre', {
+				group = vim.api.nvim_create_augroup('BiomeFormatting', { clear = true }),
+				buffer = bufnr,
+				callback = function()
+					vim.lsp.buf.code_action({
+						context = {
+							only = { 'source.fixAll.biome' },
+							diagnostics = {},
+						},
+						apply = true,
+					})
+				end,
+			})
+		end
+	end,
 	root_dir = function(bufnr, on_dir)
 		local fname = vim.api.nvim_buf_get_name(bufnr)
 		local root_files = { 'biome.json', 'biome.jsonc' }
@@ -40,5 +56,5 @@ return {
 		local root_dir = vim.fs.dirname(vim.fs.find(root_files, { path = fname, upward = true })[1])
 		on_dir(root_dir)
 	end,
-	end,
+	workspace_required = true,
 }
