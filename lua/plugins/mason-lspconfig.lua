@@ -4,10 +4,8 @@ return {
 		'mason-org/mason.nvim',
 	},
 	opts = {
-		automatic_enable = {
-			exclude = { 'docker_compose_language_service', 'vtsls' },
-		},
 		ensure_installed = {
+			'basedpyright',
 			'bashls',
 			'cssls',
 			'docker_compose_language_service',
@@ -16,7 +14,6 @@ return {
 			'jsonls',
 			'lua_ls',
 			'postgres_lsp',
-			'pyright',
 			'vtsls',
 			'yamlls',
 		},
