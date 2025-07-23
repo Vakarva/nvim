@@ -58,8 +58,6 @@ vim.keymap.set('v', '<A-k>', ":<C-u>execute \"'<,'>move '<-\" . (v:count1 + 1)<c
 
 -- Navigation and scrolling improvements
 vim.keymap.set('n', 'J', 'mzJ`z', { desc = 'Join lines without moving cursor' })
-vim.keymap.set('n', '<C-d>', '<C-d>zz', { desc = 'Page down and center cursor' })
-vim.keymap.set('n', '<C-u>', '<C-u>zz', { desc = 'Page up and center cursor' })
 vim.keymap.set('n', 'n', 'nzzzv', { desc = 'Next search result, center and unfold' })
 vim.keymap.set('n', 'N', 'Nzzzv', { desc = 'Prev search result, center and unfold' })
 vim.keymap.set('n', '=ap', "ma=ap'a", { desc = 'Format paragraph and restore cursor' })
