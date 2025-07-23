@@ -5,7 +5,6 @@ return {
 		ensure_installed = {
 			'hadolint',
 			'prettierd',
-			'ruff',
 			'stylua',
 			'sqruff',
 		},

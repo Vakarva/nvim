@@ -15,6 +15,7 @@ return {
 			'jsonls',
 			'lua_ls',
 			'postgres_lsp',
+			'ruff',
 			'vtsls',
 			'yamlls',
 		},
