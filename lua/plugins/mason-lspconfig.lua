@@ -7,6 +7,7 @@ return {
 		ensure_installed = {
 			'basedpyright',
 			'bashls',
+			'biome',
 			'cssls',
 			'docker_compose_language_service',
 			'dockerls',
