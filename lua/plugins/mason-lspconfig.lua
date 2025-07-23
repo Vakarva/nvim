@@ -17,6 +17,7 @@ return {
 			'jsonls',
 			'lua_ls',
 			'marksman',
+			'nginx_language_server',
 			'postgres_lsp',
 			'ruff',
 			'vtsls',
