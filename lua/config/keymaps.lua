@@ -33,7 +33,7 @@ vim.keymap.set('n', '[w', diagnostic_goto(false, 'WARN'), { desc = 'Prev Warning
 -- Disable
 vim.keymap.set('n', 'Q', '<nop>', { desc = 'Disable Ex mode' })
 
--- Indenting
+-- Formatting
 vim.keymap.set('v', '<', '<gv', { desc = 'Indent left and reselect' })
 vim.keymap.set('v', '>', '>gv', { desc = 'Indent right and reselect' })
 
