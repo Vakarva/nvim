@@ -60,7 +60,7 @@ return {
             { '<leader>ss', function() builtin.lsp_document_symbols() end, desc = 'Goto Symbol', },
             { '<leader>sS', function() builtin.lsp_dynamic_workspace_symbols() end, desc = 'goto symbol (workspace)', },
             -- UI
-            { '<leader>uC', function() builtin.colorscheme({ enable_preview = true }) end, desc = 'Colorscheme with Preview' },
+            { '<leader>UC', function() builtin.colorscheme({ enable_preview = true }) end, desc = 'Colorscheme with Preview' },
 			-- stylua: ignore end
 		}
 	end,

@@ -9,7 +9,6 @@ vim.opt.wrap = false -- Don't wrap long lines
 vim.opt.backup = false -- Don't create backup files
 vim.opt.isfname:append('@-@') -- Include @ and - in filenames
 vim.opt.swapfile = false -- Don't create swap files
-vim.opt.undodir = vim.fn.stdpath('data') .. '/undo' -- Undo directory
 vim.opt.undofile = true -- Persistent undo across sessions
 
 -- Indentation & Spacing
