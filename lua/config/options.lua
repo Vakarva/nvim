@@ -54,12 +54,3 @@ vim.api.nvim_create_autocmd('FileType', {
 	end,
 	desc = 'Git commit message formatting (50/72 rule)',
 })
-
--- Python: Follow Ruff formatter standard
-vim.api.nvim_create_autocmd('FileType', {
-	pattern = 'python',
-	callback = function()
-		vim.opt_local.colorcolumn = '88'
-	end,
-	desc = 'Python Ruff formatter line length',
-})
