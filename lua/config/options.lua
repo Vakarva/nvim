@@ -1,5 +1,5 @@
 -- Display Settings
-vim.opt.colorcolumn = '120' -- Visual guide at 100 characters (modern default)
+vim.opt.colorcolumn = '120' -- Visual guide at 100 characters
 vim.opt.nu = true -- Show absolute line numbers
 vim.opt.relativenumber = true -- Show relative line numbers
 vim.opt.signcolumn = 'yes' -- Always show sign column
@@ -52,5 +52,14 @@ vim.api.nvim_create_autocmd('FileType', {
 		vim.opt_local.colorcolumn = '51,73'
 		vim.opt_local.textwidth = 72
 	end,
-	desc = 'Git commit message formatting (50/72 rule)',
+	desc = 'Git commit message line length ruler and formatting (50/72 rule)',
+})
+
+-- Python: Follow Ruff formatter standard
+vim.api.nvim_create_autocmd('FileType', {
+	pattern = 'python',
+	callback = function()
+		vim.opt_local.colorcolumn = '88'
+	end,
+	desc = 'Python line length ruler',
 })
