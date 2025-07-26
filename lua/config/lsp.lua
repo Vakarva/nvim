@@ -39,4 +39,7 @@ vim.diagnostic.config({
 		header = '',
 		prefix = '',
 	},
+	virtual_lines = {
+		current_line = true,
+	},
 })
