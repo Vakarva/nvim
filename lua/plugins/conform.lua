@@ -40,6 +40,7 @@ return {
 		},
 		formatters_by_ft = {
 			['*'] = { 'trim_whitespace' },
+			bash = { 'beautysh' },
 			css = { 'biome' },
 			html = { 'biome' },
 			javascript = { 'biome', 'biome-organize-imports' },
@@ -52,6 +53,7 @@ return {
 			typescript = { 'biome', 'biome-organize-imports' },
 			typescriptreact = { 'biome', 'biome-organize-imports' },
 			yaml = { 'prettierd' },
+			zsh = { 'beautysh' },
 		},
 	},
 }
