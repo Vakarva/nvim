@@ -19,7 +19,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 		vim.keymap.set(
 			'n',
-			'gr',
+			'grr',
 			'<cmd>FzfLua lsp_references jump1=true ignore_current_line=true<cr>',
 			vim.tbl_extend('force', keymapOpts, { desc = 'Find References', nowait = true })
 		)
@@ -48,8 +48,5 @@ vim.diagnostic.config({
 		source = 'if_many',
 		header = '',
 		prefix = '',
-	},
-	virtual_lines = {
-		current_line = true,
 	},
 })
