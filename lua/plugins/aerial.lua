@@ -13,6 +13,7 @@ return {
 		layout = {
 			default_direction = 'left',
 			placement = 'edge',
+			resize_to_content = false,
 			win_opts = {
 				winhl = 'Normal:NormalFloat,FloatBorder:NormalFloat,SignColumn:SignColumnSB',
 				signcolumn = 'yes',
@@ -51,10 +52,6 @@ return {
 			nested_top = '│ ',
 			whitespace = '  ',
 		},
-		on_attach = function(bufnr)
-			vim.keymap.set('n', '{', '<cmd>AerialPrev<CR>', { buffer = bufnr })
-			vim.keymap.set('n', '}', '<cmd>AerialNext<CR>', { buffer = bufnr })
-		end,
 		show_guides = true,
 	},
 }
