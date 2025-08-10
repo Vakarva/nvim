@@ -1,6 +1,3 @@
--- Clipboard
-vim.g.clipboard = 'osc52'
-
 -- Display Settings
 vim.opt.colorcolumn = '120' -- Visual guide at 100 characters
 vim.opt.nu = true -- Show absolute line numbers
