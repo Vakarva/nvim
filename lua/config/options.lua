@@ -28,6 +28,8 @@ vim.opt.scrolloff = 8 -- Keep 8 lines visible above/below cursor
 vim.opt.updatetime = 50 -- Faster completion and updates (ms)
 
 -- Search Configuration
+vim.opt.grepprg = 'rg --vimgrep'
+vim.opt.grepformat = '%f:%l:%c:%m'
 vim.opt.hlsearch = false -- Don't highlight search results
 vim.opt.incsearch = true -- Show matches while typing search
 
