@@ -6,15 +6,12 @@ return {
 		opts = {
 			auto_integrations = true,
 			flavour = 'mocha',
-			integrations = {
-				native_lsp = {
-					enabled = true,
-					underlines = {
-						errors = { 'undercurl' },
-						hints = { 'undercurl' },
-						warnings = { 'undercurl' },
-						information = { 'undercurl' },
-					},
+			lsp_styles = {
+				underlines = {
+					errors = { 'undercurl' },
+					hints = { 'undercurl' },
+					warnings = { 'undercurl' },
+					information = { 'undercurl' },
 				},
 			},
 		},
