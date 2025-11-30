@@ -3,6 +3,11 @@ vim.keymap.set('n', '[b', '<cmd>bprevious<CR>', { desc = 'Previous buffer' })
 vim.keymap.set('n', ']b', '<cmd>bnext<CR>', { desc = 'Next buffer' })
 vim.keymap.set('n', '<leader>bb', '<cmd>e #<cr>', { desc = 'Switch to Other Buffer' })
 vim.keymap.set('n', '<leader>bD', '<cmd>:bd<cr>', { desc = 'Delete Buffer and Window' })
+vim.keymap.set('n', '<leader>by', function()
+	local path = vim.fn.expand('%')
+	vim.fn.setreg('+', path)
+	vim.notify('Copied: ' .. path, vim.log.levels.INFO)
+end, { desc = 'Yank buffer file path' })
 
 -- Clipboard and register management
 vim.keymap.set('x', '<leader>p', '"_dP', { desc = 'Paste without overwriting register' })
