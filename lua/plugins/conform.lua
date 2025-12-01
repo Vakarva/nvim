@@ -68,6 +68,7 @@ return {
 			markdown = { 'prettierd', 'markdownlint-cli2', 'markdown-toc' },
 			['markdown.mdx'] = { 'prettierd', 'markdownlint-cli2', 'markdown-toc' },
 			python = { 'ruff_fix', 'ruff_organize_imports', 'ruff_format' },
+			rust = { 'rustfmt' },
 			sql = { 'sqruff' },
 			typescript = { 'biome', 'biome-organize-imports' },
 			typescriptreact = { 'biome', 'biome-organize-imports' },

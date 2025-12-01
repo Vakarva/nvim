@@ -46,6 +46,7 @@ return {
 			'query',
 			'regex',
 			'rst',
+			'rust',
 			'scss',
 			'ssh_config',
 			'sql',

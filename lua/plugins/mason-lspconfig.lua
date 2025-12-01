@@ -20,6 +20,7 @@ return {
 			'nginx_language_server',
 			'postgres_lsp',
 			'ruff',
+			'rust_analyzer',
 			'vtsls',
 			'yamlls',
 		},
