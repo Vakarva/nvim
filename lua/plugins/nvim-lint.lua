@@ -11,6 +11,10 @@ return {
 			sql = { 'sqruff' },
 		}
 
+		local markdownlint = lint.linters['markdownlint-cli2']
+		markdownlint.args =
+			vim.list_extend(markdownlint.args or {}, { '--config', vim.fn.stdpath('config') .. '/.markdownlint.jsonc' })
+
 		local lint_augroup = vim.api.nvim_create_augroup('lint', { clear = true })
 		vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWritePost', 'InsertLeave' }, {
 			group = lint_augroup,

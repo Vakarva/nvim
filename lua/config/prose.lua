@@ -2,9 +2,11 @@ local M = {}
 
 function M.setup()
 	-- Spell checking
-	vim.opt_local.spell = true
-	vim.opt_local.spelllang = 'en_us'
-
+	if vim.api.nvim_win_get_config(0).relative == '' then
+		vim.opt_local.spell = true
+		vim.opt_local.spelllang = 'en_us'
+	end
+	--
 	-- Word wrapping
 	vim.opt_local.wrap = true
 	vim.opt_local.linebreak = true
