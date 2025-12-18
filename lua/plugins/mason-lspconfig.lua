@@ -23,6 +23,7 @@ return {
 			'ty',
 			'vtsls',
 			'yamlls',
+			'zls',
 		},
 	},
 }
