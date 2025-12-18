@@ -5,7 +5,6 @@ return {
 	},
 	opts = {
 		ensure_installed = {
-			'basedpyright',
 			'bashls',
 			'biome',
 			'css_variables',
@@ -21,6 +20,7 @@ return {
 			'postgres_lsp',
 			'ruff',
 			'rust_analyzer',
+			'ty',
 			'vtsls',
 			'yamlls',
 		},
