@@ -117,20 +117,6 @@ return {
 				end,
 				mode = { 'n', 'x', 'o' },
 			},
-			{
-				']d',
-				function()
-					move.goto_next('@conditional.outer', 'textobjects')
-				end,
-				mode = { 'n', 'x', 'o' },
-			},
-			{
-				'[d',
-				function()
-					move.goto_previous('@conditional.outer', 'textobjects')
-				end,
-				mode = { 'n', 'x', 'o' },
-			},
 			-- Repeat movement with ; and ,
 			{
 				';',
