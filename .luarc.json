@@ -5,8 +5,7 @@
     "telemetry.enable": false,
     "workspace.library": [
         "${3rd}/luv/library",
-        "${3rd}/busted/library",
-        "$VIMRUNTIME/lua",
-        "${VIMRUNTIME}/lua/vim/lsp"
+        "$HOME/.local/share/nvim/lazy",
+        "$VIMRUNTIME"
     ]
 }
