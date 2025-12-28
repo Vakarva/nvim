@@ -74,6 +74,7 @@ return {
 			typescript = { 'biome', 'biome-organize-imports' },
 			typescriptreact = { 'biome', 'biome-organize-imports' },
 			yaml = { 'prettierd' },
+			zig = { 'zigfmt' },
 		},
 	},
 }
