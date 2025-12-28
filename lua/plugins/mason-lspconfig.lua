@@ -7,6 +7,7 @@ return {
 		ensure_installed = {
 			'bashls',
 			'biome',
+			'clangd',
 			'css_variables',
 			'cssls',
 			'cssmodules_ls',

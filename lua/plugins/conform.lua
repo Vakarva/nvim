@@ -58,6 +58,7 @@ return {
 		formatters_by_ft = {
 			['*'] = { 'trim_whitespace' },
 			bash = { 'beautysh' },
+			c = { 'clang-format' },
 			css = { 'biome' },
 			html = { 'biome' },
 			javascript = { 'biome', 'biome-organize-imports' },

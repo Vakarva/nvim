@@ -4,6 +4,7 @@ return {
 	opts = {
 		ensure_installed = {
 			'beautysh',
+			'clang-format',
 			'hadolint',
 			'markdownlint-cli2',
 			'markdown-toc',
