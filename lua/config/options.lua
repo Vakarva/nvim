@@ -6,6 +6,7 @@ vim.opt.signcolumn = 'yes' -- Always show sign column
 vim.opt.wrap = false -- Don't wrap long lines
 
 -- File & Buffer Management
+vim.g.editorconfig = true -- Respect .editorconfig files for indent settings
 vim.opt.backup = false -- Don't create backup files
 vim.opt.isfname:append('@-@') -- Include @ and - in filenames
 vim.opt.swapfile = false -- Don't create swap files
