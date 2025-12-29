@@ -1,5 +1,5 @@
 -- Display Settings
-vim.opt.colorcolumn = '120' -- Visual guide at 100 characters
+vim.opt.colorcolumn = '121' -- Visual guide at 120 characters
 vim.opt.nu = true -- Show absolute line numbers
 vim.opt.relativenumber = true -- Show relative line numbers
 vim.opt.signcolumn = 'yes' -- Always show sign column
@@ -48,7 +48,6 @@ vim.api.nvim_create_autocmd('BufWinEnter', {
 })
 
 -- Filetype-Specific Settings
--- Git commit messages: 50-character subject, 72-character body
 vim.api.nvim_create_autocmd('FileType', {
 	pattern = 'gitcommit',
 	callback = function()
@@ -57,12 +56,10 @@ vim.api.nvim_create_autocmd('FileType', {
 	end,
 	desc = 'Git commit message line length ruler and formatting (50/72 rule)',
 })
-
--- Python: Follow Ruff formatter standard
 vim.api.nvim_create_autocmd('FileType', {
 	pattern = 'python',
 	callback = function()
-		vim.opt_local.colorcolumn = '88'
+		vim.opt_local.colorcolumn = '89'
 	end,
 	desc = 'Python line length ruler',
 })
