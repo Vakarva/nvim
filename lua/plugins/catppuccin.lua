@@ -1,24 +1,24 @@
 return {
-	{
-		'catppuccin/nvim',
-		lazy = false,
-		name = 'catppuccin',
-		opts = {
-			auto_integrations = true,
-			flavour = 'mocha',
-			lsp_styles = {
-				underlines = {
-					errors = { 'undercurl' },
-					hints = { 'undercurl' },
-					warnings = { 'undercurl' },
-					information = { 'undercurl' },
-				},
-			},
-		},
-		priority = 1000,
-		config = function(_, opts)
-			require('catppuccin').setup(opts)
-			vim.cmd.colorscheme('catppuccin')
-		end,
-	},
+    {
+        'catppuccin/nvim',
+        lazy = false,
+        name = 'catppuccin',
+        opts = {
+            auto_integrations = true,
+            flavour = 'mocha',
+            lsp_styles = {
+                underlines = {
+                    errors = { 'undercurl' },
+                    hints = { 'undercurl' },
+                    warnings = { 'undercurl' },
+                    information = { 'undercurl' },
+                },
+            },
+        },
+        priority = 1000,
+        config = function(_, opts)
+            require('catppuccin').setup(opts)
+            vim.cmd.colorscheme('catppuccin')
+        end,
+    },
 }

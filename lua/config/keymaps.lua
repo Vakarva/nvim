@@ -4,9 +4,9 @@ vim.keymap.set('n', ']b', '<cmd>bnext<CR>', { desc = 'Next buffer' })
 vim.keymap.set('n', '<leader>bb', '<cmd>e #<cr>', { desc = 'Switch to Other Buffer' })
 vim.keymap.set('n', '<leader>bD', '<cmd>:bd<cr>', { desc = 'Delete Buffer and Window' })
 vim.keymap.set('n', '<leader>by', function()
-	local path = vim.fn.expand('%')
-	vim.fn.setreg('+', path)
-	vim.notify('Copied: ' .. path, vim.log.levels.INFO)
+    local path = vim.fn.expand('%')
+    vim.fn.setreg('+', path)
+    vim.notify('Copied: ' .. path, vim.log.levels.INFO)
 end, { desc = 'Yank buffer file path' })
 
 -- Clipboard and register management
@@ -21,13 +21,13 @@ vim.keymap.set('n', 'gcO', 'O<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>', { desc = 
 
 -- Diagnostics
 local diagnostic_goto = function(next, severity)
-	return function()
-		vim.diagnostic.jump({
-			count = (next and 1 or -1) * vim.v.count1,
-			float = true,
-			severity = severity and vim.diagnostic.severity[severity] or nil,
-		})
-	end
+    return function()
+        vim.diagnostic.jump({
+            count = (next and 1 or -1) * vim.v.count1,
+            float = true,
+            severity = severity and vim.diagnostic.severity[severity] or nil,
+        })
+    end
 end
 vim.keymap.set('n', '<leader>cd', vim.diagnostic.open_float, { desc = 'Line Diagnostics' })
 vim.keymap.set('n', ']d', diagnostic_goto(true), { desc = 'Next Diagnostic' })
@@ -49,10 +49,10 @@ vim.keymap.set('n', '<leader>K', '<cmd>norm! K<cr>', { desc = 'Keywordprg' })
 
 -- Location list
 vim.keymap.set('n', '<leader>xl', function()
-	local success, err = pcall(vim.fn.getloclist(0, { winid = 0 }).winid ~= 0 and vim.cmd.lclose or vim.cmd.lopen)
-	if not success and err then
-		vim.notify(err, vim.log.levels.ERROR)
-	end
+    local success, err = pcall(vim.fn.getloclist(0, { winid = 0 }).winid ~= 0 and vim.cmd.lclose or vim.cmd.lopen)
+    if not success and err then
+        vim.notify(err, vim.log.levels.ERROR)
+    end
 end, { desc = 'Location List' })
 
 -- Move lines up/down with Alt+j/k (works across all modes)
@@ -73,10 +73,10 @@ vim.keymap.set('n', '=ap', "ma=ap'a", { desc = 'Format paragraph and restore cur
 
 -- Quickfix
 vim.keymap.set('n', '<leader>xq', function()
-	local success, err = pcall(vim.fn.getqflist({ winid = 0 }).winid ~= 0 and vim.cmd.cclose or vim.cmd.copen)
-	if not success and err then
-		vim.notify(err, vim.log.levels.ERROR)
-	end
+    local success, err = pcall(vim.fn.getqflist({ winid = 0 }).winid ~= 0 and vim.cmd.cclose or vim.cmd.copen)
+    if not success and err then
+        vim.notify(err, vim.log.levels.ERROR)
+    end
 end, { desc = 'Quickfix List' })
 vim.keymap.set('n', '[q', vim.cmd.cprev, { desc = 'Previous Quickfix' })
 vim.keymap.set('n', ']q', vim.cmd.cnext, { desc = 'Next Quickfix' })
@@ -92,10 +92,10 @@ vim.keymap.set('n', '<leader><tab>[', '<cmd>tabprevious<cr>', { desc = 'Previous
 
 -- Text manipulation
 vim.keymap.set(
-	'n',
-	'<leader>s',
-	[[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
-	{ desc = 'Search and replace word under cursor' }
+    'n',
+    '<leader>s',
+    [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
+    { desc = 'Search and replace word under cursor' }
 )
 -- vim.keymap.set('n', '<leader>x', '<cmd>!chmod +x %<CR>', { silent = true, desc = 'Make current file executable' })
 

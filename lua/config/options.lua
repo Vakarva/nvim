@@ -38,35 +38,35 @@ vim.opt.incsearch = true -- Show matches while typing search
 vim.opt.splitright = true -- New vertical splits open to the right
 vim.opt.splitbelow = true -- New horizontal splits open below
 vim.api.nvim_create_autocmd('BufWinEnter', {
-	pattern = '*',
-	callback = function()
-		if vim.bo.buftype == 'help' then
-			vim.cmd('wincmd L')
-		end
-	end,
-	desc = 'Move help windows to the right side',
+    pattern = '*',
+    callback = function()
+        if vim.bo.buftype == 'help' then
+            vim.cmd('wincmd L')
+        end
+    end,
+    desc = 'Move help windows to the right side',
 })
 
 -- Filetype-Specific Settings
 vim.api.nvim_create_autocmd('FileType', {
-	pattern = 'c',
-	callback = function()
-		vim.opt_local.colorcolumn = '101'
-	end,
-	desc = 'C line length ruler',
+    pattern = 'c',
+    callback = function()
+        vim.opt_local.colorcolumn = '101'
+    end,
+    desc = 'C line length ruler',
 })
 vim.api.nvim_create_autocmd('FileType', {
-	pattern = 'gitcommit',
-	callback = function()
-		vim.opt_local.colorcolumn = '51,73'
-		vim.opt_local.textwidth = 72
-	end,
-	desc = 'Git commit message line length ruler and formatting (50/72 rule)',
+    pattern = 'gitcommit',
+    callback = function()
+        vim.opt_local.colorcolumn = '51,73'
+        vim.opt_local.textwidth = 72
+    end,
+    desc = 'Git commit message line length ruler and formatting (50/72 rule)',
 })
 vim.api.nvim_create_autocmd('FileType', {
-	pattern = 'python',
-	callback = function()
-		vim.opt_local.colorcolumn = '89'
-	end,
-	desc = 'Python line length ruler',
+    pattern = 'python',
+    callback = function()
+        vim.opt_local.colorcolumn = '89'
+    end,
+    desc = 'Python line length ruler',
 })
