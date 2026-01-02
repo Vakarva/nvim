@@ -1,11 +1,33 @@
-local lsp_configs = {}
+local servers = {
+    'bashls',
+    'biome',
+    'clangd',
+    'css_variables',
+    'cssls',
+    'cssmodules_ls',
+    'docker_compose_language_service',
+    'dockerls',
+    'html',
+    'jsonls',
+    'lua_ls',
+    'marksman',
+    'nginx_language_server',
+    'postgres_lsp',
+    'ruff',
+    'sqruff',
+    'ty',
+    'vtsls',
+    'yamlls',
+    'zls',
+}
 
-for _, f in pairs(vim.api.nvim_get_runtime_file('lsp/*.lua', true)) do
-    local server_name = vim.fn.fnamemodify(f, ':t:r')
-    table.insert(lsp_configs, server_name)
-end
+-- Load local server configurations
+-- for _, f in pairs(vim.api.nvim_get_runtime_file('lsp/*.lua', true)) do
+--     local server_name = vim.fn.fnamemodify(f, ':t:r')
+--     table.insert(servers, server_name)
+-- end
 
-vim.lsp.enable(lsp_configs)
+vim.lsp.enable(servers)
 
 vim.api.nvim_create_autocmd('LspAttach', {
     callback = function(e)
