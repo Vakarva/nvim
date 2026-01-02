@@ -1,5 +1,6 @@
 return {
-    'folke/tokyonight.nvim',
+    'Shatur/neovim-ayu',
     -- lazy = false,
+    main = 'ayu',
     -- priority = 1000,
 }
