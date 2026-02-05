@@ -7,6 +7,7 @@ local servers = {
     'cssmodules_ls',
     'docker_compose_language_service',
     'dockerls',
+    'gopls',
     'html',
     'jsonls',
     'lua_ls',
@@ -20,6 +21,19 @@ local servers = {
     'yamlls',
     'zls',
 }
+
+vim.lsp.config('gopls', {
+    settings = {
+        gopls = {
+            gofumpt = true,
+            analyses = {
+                unusedparams = true,
+                shadow = true,
+            },
+            staticcheck = true,
+        },
+    },
+})
 
 -- Load local server configurations
 -- for _, f in pairs(vim.api.nvim_get_runtime_file('lsp/*.lua', true)) do

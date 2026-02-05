@@ -13,6 +13,7 @@ return {
             'cssmodules_ls',
             'docker_compose_language_service',
             'dockerls',
+            'gopls',
             'html',
             'jsonls',
             'lua_ls',

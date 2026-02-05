@@ -5,6 +5,7 @@ return {
         ensure_installed = {
             'beautysh',
             'clang-format',
+            'golangci-lint',
             'hadolint',
             'markdownlint-cli2',
             'markdown-toc',
