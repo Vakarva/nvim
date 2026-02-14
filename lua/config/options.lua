@@ -70,3 +70,10 @@ vim.api.nvim_create_autocmd('FileType', {
     end,
     desc = 'Python line length ruler',
 })
+vim.api.nvim_create_autocmd('FileType', {
+    pattern = 'sql',
+    callback = function()
+        vim.opt_local.colorcolumn = '80'
+    end,
+    desc = 'SQL line length ruler',
+})
