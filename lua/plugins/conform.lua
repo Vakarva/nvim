@@ -33,7 +33,6 @@ return {
         },
         format_on_save = {
             timeout_ms = 500,
-            lsp_fallback = true,
         },
         formatters = {
             injected = { options = { ignore_errors = true } },
@@ -56,7 +55,6 @@ return {
             },
         },
         formatters_by_ft = {
-            ['*'] = { 'trim_whitespace' },
             bash = { 'beautysh' },
             c = { 'clang-format' },
             css = { 'biome' },
