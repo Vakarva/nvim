@@ -6,6 +6,7 @@ return {
             'beautysh',
             'clang-format',
             'golangci-lint',
+            'golangci-lint-langserver',
             'hadolint',
             'markdownlint-cli2',
             'markdown-toc',

@@ -6,7 +6,6 @@ return {
 
         lint.linters_by_ft = {
             dockerfile = { 'hadolint' },
-            go = { 'golangcilint' },
             markdown = { 'markdownlint-cli2' },
             rust = { 'clippy' },
             sql = { 'sqruff' },

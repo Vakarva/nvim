@@ -7,6 +7,7 @@ local servers = {
     'cssmodules_ls',
     'docker_compose_language_service',
     'dockerls',
+    'golangci_lint_ls',
     'gopls',
     'html',
     'jsonls',
@@ -42,6 +43,33 @@ vim.lsp.config('gopls', {
 -- end
 
 vim.lsp.enable(servers)
+
+-- Organize imports via gopls before saving Go files.
+-- Formatting (with gofumpt) is handled by conform's LSP fallback.
+vim.api.nvim_create_autocmd('BufWritePre', {
+    pattern = '*.go',
+    callback = function(e)
+        local params = {
+            textDocument = vim.lsp.util.make_text_document_params(e.buf),
+            range = vim.lsp.util.make_range_params(0, 'utf-16').range,
+            context = { only = { 'source.organizeImports' }, diagnostics = {} },
+        }
+        local result = vim.lsp.buf_request_sync(e.buf, 'textDocument/codeAction', params, 3000)
+        for cid, res in pairs(result or {}) do
+            for _, action in pairs(res.result or {}) do
+                if action.edit then
+                    vim.lsp.util.apply_workspace_edit(action.edit, 'utf-16')
+                end
+                if action.command then
+                    local client = vim.lsp.get_client_by_id(cid)
+                    if client then
+                        client:exec_cmd(action.command, { bufnr = e.buf })
+                    end
+                end
+            end
+        end
+    end,
+})
 
 vim.api.nvim_create_autocmd('LspAttach', {
     callback = function(e)
