@@ -8,7 +8,6 @@ return {
             dockerfile = { 'hadolint' },
             markdown = { 'markdownlint-cli2' },
             rust = { 'clippy' },
-            sql = { 'sqruff' },
         }
 
         local markdownlint = lint.linters['markdownlint-cli2']
