@@ -63,5 +63,14 @@ return {
             },
         }
     end,
-    opts = {},
+    opts = {
+        default = {
+            select = function(list_item)
+                if list_item == nil then
+                    return
+                end
+                vim.cmd.edit(vim.fn.fnameescape(list_item.value))
+            end,
+        },
+    },
 }
