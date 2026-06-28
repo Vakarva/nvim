@@ -9,16 +9,18 @@ local servers = {
     'dockerls',
     'golangci_lint_ls',
     'gopls',
+    'helm_ls',
     'html',
     'jsonls',
     'lua_ls',
     'marksman',
     'nginx_language_server',
+    'openapi',
     'postgres_lsp',
     'ruff',
     'sqruff',
+    'tsgo',
     'ty',
-    'vtsls',
     'yamlls',
     'zls',
 }
@@ -35,12 +37,6 @@ vim.lsp.config('gopls', {
         },
     },
 })
-
--- Load local server configurations
--- for _, f in pairs(vim.api.nvim_get_runtime_file('lsp/*.lua', true)) do
---     local server_name = vim.fn.fnamemodify(f, ':t:r')
---     table.insert(servers, server_name)
--- end
 
 vim.lsp.enable(servers)
 

@@ -1,3 +1,5 @@
+require('vim._core.ui2').enable()
+
 -- Display Settings
 vim.opt.colorcolumn = '121' -- Visual guide at 120 characters
 vim.opt.nu = true -- Show absolute line numbers

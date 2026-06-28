@@ -3,6 +3,7 @@ return {
     event = { 'BufReadPre', 'BufNewFile' },
     config = function()
         local lint = require('lint')
+        local is_spec = require('util.openapi').is_spec
 
         lint.linters_by_ft = {
             dockerfile = { 'hadolint' },
@@ -19,6 +20,9 @@ return {
             group = lint_augroup,
             callback = function()
                 lint.try_lint()
+                if vim.bo.filetype == 'yaml' and is_spec(0) then
+                    lint.try_lint('vacuum')
+                end
             end,
         })
     end,

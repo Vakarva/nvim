@@ -22,6 +22,7 @@ return {
             'gotmpl',
             'gowork',
             'graphql',
+            'helm',
             'html',
             'http',
             'javascript',
