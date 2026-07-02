@@ -4,7 +4,7 @@ return {
     keys = {
         { '<leader>u', '<cmd>UndotreeToggle<cr>', desc = 'Toggle Undotree' },
     },
-    config = function()
+    init = function()
         -- Better layout
         vim.g.undotree_WindowLayout = 2
         vim.g.undotree_SplitWidth = 40

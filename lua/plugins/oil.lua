@@ -1,7 +1,5 @@
 return {
     'stevearc/oil.nvim',
-    ---@module 'oil'
-    ---@type oil.SetupOpts
     dependencies = {
         'nvim-tree/nvim-web-devicons',
     },
@@ -16,6 +14,8 @@ return {
         },
     },
     lazy = false,
+    ---@module 'oil'
+    ---@type oil.SetupOpts
     opts = {
         delete_to_trash = true,
         keymaps = {
