@@ -13,6 +13,8 @@ return {
             'prettierd',
             'stylua',
             'sqruff',
+            'tflint',
+            'trivy',
             'vacuum',
         },
     },

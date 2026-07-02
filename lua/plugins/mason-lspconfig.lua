@@ -23,6 +23,7 @@ return {
             'postgres_lsp',
             'ruff',
             'rust_analyzer',
+            'tofu_ls',
             'tsgo',
             'ty',
             'yamlls',
