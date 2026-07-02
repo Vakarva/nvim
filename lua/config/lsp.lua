@@ -1,30 +1,5 @@
-local servers = {
-    'bashls',
-    'biome',
-    'clangd',
-    'css_variables',
-    'cssls',
-    'cssmodules_ls',
-    'docker_compose_language_service',
-    'dockerls',
-    'golangci_lint_ls',
-    'gopls',
-    'helm_ls',
-    'html',
-    'jsonls',
-    'lua_ls',
-    'marksman',
-    'nginx_language_server',
-    'openapi',
-    'postgres_lsp',
-    'ruff',
-    'sqruff',
-    'tsgo',
-    'ty',
-    'yamlls',
-    'zls',
-}
-
+-- Servers are enabled by mason-lspconfig's automatic_enable, which covers
+-- everything installed through mason (mason-lspconfig or mason-tool-installer)
 vim.lsp.config('gopls', {
     settings = {
         gopls = {
@@ -38,30 +13,27 @@ vim.lsp.config('gopls', {
     },
 })
 
-vim.lsp.enable(servers)
-
 -- Organize imports via gopls before saving Go files.
 -- Formatting (with gofumpt) is handled by conform's LSP fallback.
 vim.api.nvim_create_autocmd('BufWritePre', {
     pattern = '*.go',
     callback = function(e)
+        local client = vim.lsp.get_clients({ bufnr = e.buf, name = 'gopls' })[1]
+        if not client then
+            return
+        end
         local params = {
             textDocument = vim.lsp.util.make_text_document_params(e.buf),
-            range = vim.lsp.util.make_range_params(0, 'utf-16').range,
+            range = vim.lsp.util.make_range_params(0, client.offset_encoding).range,
             context = { only = { 'source.organizeImports' }, diagnostics = {} },
         }
-        local result = vim.lsp.buf_request_sync(e.buf, 'textDocument/codeAction', params, 3000)
-        for cid, res in pairs(result or {}) do
-            for _, action in pairs(res.result or {}) do
-                if action.edit then
-                    vim.lsp.util.apply_workspace_edit(action.edit, 'utf-16')
-                end
-                if action.command then
-                    local client = vim.lsp.get_client_by_id(cid)
-                    if client then
-                        client:exec_cmd(action.command, { bufnr = e.buf })
-                    end
-                end
+        local result = client:request_sync('textDocument/codeAction', params, 3000, e.buf)
+        for _, action in pairs(result and result.result or {}) do
+            if action.edit then
+                vim.lsp.util.apply_workspace_edit(action.edit, client.offset_encoding)
+            end
+            if action.command then
+                client:exec_cmd(action.command, { bufnr = e.buf })
             end
         end
     end,
