@@ -17,146 +17,48 @@ return {
             },
         })
     end,
-    init = function()
-        vim.g.no_plugin_maps = true
-    end,
     keys = function()
-        local swap = require('nvim-treesitter-textobjects.swap')
-        local move = require('nvim-treesitter-textobjects.move')
-        local ts_repeat_move = require('nvim-treesitter-textobjects.repeatable_move')
+        -- Defer the requires to keypress time so registering the keymaps
+        -- at startup doesn't load the plugin
+        local function swap(fn, textobject)
+            return function()
+                require('nvim-treesitter-textobjects.swap')[fn](textobject)
+            end
+        end
+        local function move(fn, textobject, query_group)
+            return function()
+                require('nvim-treesitter-textobjects.move')[fn](textobject, query_group)
+            end
+        end
+        local function repeat_move(fn)
+            return function()
+                return require('nvim-treesitter-textobjects.repeatable_move')[fn]()
+            end
+        end
+        local nxo = { 'n', 'x', 'o' }
 
         return {
-            {
-                '<leader>a',
-                function()
-                    swap.swap_next('@parameter.inner')
-                end,
-                mode = 'n',
-            },
-            {
-                '<leader>A',
-                function()
-                    swap.swap_previous('@parameter.outer')
-                end,
-                mode = 'n',
-            },
-            {
-                ']m',
-                function()
-                    move.goto_next_start('@function.outer', 'textobjects')
-                end,
-                mode = { 'n', 'x', 'o' },
-            },
-            {
-                ']]',
-                function()
-                    move.goto_next_start('@class.outer', 'textobjects')
-                end,
-                mode = { 'n', 'x', 'o' },
-            },
-            {
-                ']o',
-                function()
-                    move.goto_next_start({ '@loop.inner', '@loop.outer' }, 'textobjects')
-                end,
-                mode = { 'n', 'x', 'o' },
-            },
-            {
-                ']s',
-                function()
-                    move.goto_next_start('@local.scope', 'locals')
-                end,
-                mode = { 'n', 'x', 'o' },
-            },
-            {
-                ']z',
-                function()
-                    move.goto_next_start('@fold', 'folds')
-                end,
-                mode = { 'n', 'x', 'o' },
-            },
-            {
-                ']M',
-                function()
-                    move.goto_next_end('@function.outer', 'textobjects')
-                end,
-                mode = { 'n', 'x', 'o' },
-            },
-            {
-                '][',
-                function()
-                    move.goto_next_end('@class.outer', 'textobjects')
-                end,
-                mode = { 'n', 'x', 'o' },
-            },
-            {
-                '[m',
-                function()
-                    move.goto_previous_start('@function.outer', 'textobjects')
-                end,
-                mode = { 'n', 'x', 'o' },
-            },
-            {
-                '[[',
-                function()
-                    move.goto_previous_start('@class.outer', 'textobjects')
-                end,
-                mode = { 'n', 'x', 'o' },
-            },
-            {
-                '[M',
-                function()
-                    move.goto_previous_end('@function.outer', 'textobjects')
-                end,
-                mode = { 'n', 'x', 'o' },
-            },
-            {
-                '[]',
-                function()
-                    move.goto_previous_end('@class.outer', 'textobjects')
-                end,
-                mode = { 'n', 'x', 'o' },
-            },
+            { '<leader>a', swap('swap_next', '@parameter.inner'), mode = 'n' },
+            { '<leader>A', swap('swap_previous', '@parameter.inner'), mode = 'n' },
+            { ']m', move('goto_next_start', '@function.outer', 'textobjects'), mode = nxo },
+            { ']]', move('goto_next_start', '@class.outer', 'textobjects'), mode = nxo },
+            { ']o', move('goto_next_start', { '@loop.inner', '@loop.outer' }, 'textobjects'), mode = nxo },
+            { ']s', move('goto_next_start', '@local.scope', 'locals'), mode = nxo },
+            { ']z', move('goto_next_start', '@fold', 'folds'), mode = nxo },
+            { ']M', move('goto_next_end', '@function.outer', 'textobjects'), mode = nxo },
+            { '][', move('goto_next_end', '@class.outer', 'textobjects'), mode = nxo },
+            { '[m', move('goto_previous_start', '@function.outer', 'textobjects'), mode = nxo },
+            { '[[', move('goto_previous_start', '@class.outer', 'textobjects'), mode = nxo },
+            { '[M', move('goto_previous_end', '@function.outer', 'textobjects'), mode = nxo },
+            { '[]', move('goto_previous_end', '@class.outer', 'textobjects'), mode = nxo },
             -- Repeat movement with ; and ,
-            {
-                ';',
-                function()
-                    ts_repeat_move.repeat_last_move()
-                end,
-                mode = { 'n', 'x', 'o' },
-            },
-            {
-                ',',
-                function()
-                    ts_repeat_move.repeat_last_move_opposite()
-                end,
-                mode = { 'n', 'x', 'o' },
-            },
+            { ';', repeat_move('repeat_last_move'), mode = nxo },
+            { ',', repeat_move('repeat_last_move_opposite'), mode = nxo },
             -- Make builtin f, F, t, T repeatable with ; and ,
-            {
-                'f',
-                ts_repeat_move.builtin_f_expr,
-                mode = { 'n', 'x', 'o' },
-                expr = true,
-            },
-            {
-                'F',
-                ts_repeat_move.builtin_F_expr,
-                mode = { 'n', 'x', 'o' },
-                expr = true,
-            },
-            {
-                't',
-                ts_repeat_move.builtin_t_expr,
-                mode = { 'n', 'x', 'o' },
-                expr = true,
-            },
-            {
-                'T',
-                ts_repeat_move.builtin_T_expr,
-                mode = { 'n', 'x', 'o' },
-                expr = true,
-            },
+            { 'f', repeat_move('builtin_f_expr'), mode = nxo, expr = true },
+            { 'F', repeat_move('builtin_F_expr'), mode = nxo, expr = true },
+            { 't', repeat_move('builtin_t_expr'), mode = nxo, expr = true },
+            { 'T', repeat_move('builtin_T_expr'), mode = nxo, expr = true },
         }
     end,
 }

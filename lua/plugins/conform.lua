@@ -3,27 +3,24 @@ return {
     cmd = 'ConformInfo',
     dependencies = { 'mason.nvim' },
     event = { 'BufReadPre', 'BufNewFile' },
-    keys = function()
-        local conform = require('conform')
-        return {
-            {
-                '<leader>cf',
-                function()
-                    conform.format({ bufnr = vim.api.nvim_get_current_buf() })
-                end,
-                mode = { 'n', 'v' },
-                desc = 'Format',
-            },
-            {
-                '<leader>cF',
-                function()
-                    conform.format({ formatters = { 'injected' }, timeout_ms = 3000 })
-                end,
-                mode = { 'n', 'v' },
-                desc = 'Format injected languages',
-            },
-        }
-    end,
+    keys = {
+        {
+            '<leader>cf',
+            function()
+                require('conform').format()
+            end,
+            mode = { 'n', 'v' },
+            desc = 'Format',
+        },
+        {
+            '<leader>cF',
+            function()
+                require('conform').format({ formatters = { 'injected' }, timeout_ms = 3000 })
+            end,
+            mode = { 'n', 'v' },
+            desc = 'Format injected languages',
+        },
+    },
     opts = {
         default_format_opts = {
             timeout_ms = 3000,

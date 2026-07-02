@@ -3,8 +3,9 @@ return {
     cmd = 'FzfLua',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     keys = function()
-        local fzf = require('fzf-lua')
-        local root = vim.fs.root(0, { '.git', 'Makefile', 'pyproject.toml', 'package.json' }) or vim.fn.getcwd()
+        local function root()
+            return vim.fs.root(0, { '.git', 'Makefile', 'pyproject.toml', 'package.json' }) or vim.fn.getcwd()
+        end
         return {
             -- stylua: ignore start
 			{ '<c-j>', '<c-j>', ft = 'fzf', mode = 't', nowait = true },
@@ -13,15 +14,15 @@ return {
 			{ '<leader>/', '<cmd>FzfLua live_grep<cr>', desc = 'Grep (Root Dir)' },
 			{ '<leader>:', '<cmd>FzfLua command_history<cr>', desc = 'Command History' },
 			{ '<C-f>', '<cmd>FzfLua git_files<cr>', desc = 'Find Files (git-files)' },
-			{ '<leader><space>', function() fzf.files({ cwd = root }) end, desc = 'Find Files (Root Dir)', },
+			{ '<leader><space>', function() require('fzf-lua').files({ cwd = root() }) end, desc = 'Find Files (Root Dir)', },
 			-- find
 			{ '<leader>fb', '<cmd>FzfLua buffers sort_mru=true sort_lastused=true<cr>', desc = 'Buffers' },
-			{ '<leader>fc', function() fzf.files({ cwd = vim.fn.stdpath('config') }) end, desc = 'Find Config File', },
-			{ '<leader>ff', function() fzf.files({ cwd = root }) end, desc = 'Find Files (Root Dir)', },
+			{ '<leader>fc', function() require('fzf-lua').files({ cwd = vim.fn.stdpath('config') }) end, desc = 'Find Config File', },
+			{ '<leader>ff', function() require('fzf-lua').files({ cwd = root() }) end, desc = 'Find Files (Root Dir)', },
 			{ '<leader>fF', '<cmd>FzfLua files<cr>', desc = 'Find Files (cwd)' },
 			{ '<leader>fg', '<cmd>FzfLua git_files<cr>', desc = 'Find Files (git-files)' },
 			{ '<leader>fr', '<cmd>FzfLua oldfiles<cr>', desc = 'Recent' },
-			{ '<leader>fR', function() fzf.oldfiles({ cwd_only = true }) end, desc = 'Recent (cwd)', },
+			{ '<leader>fR', function() require('fzf-lua').oldfiles({ cwd_only = true }) end, desc = 'Recent (cwd)', },
 			-- git
 			{ '<leader>gc', '<cmd>FzfLua git_commits<CR>', desc = 'Commits' },
 			{ '<leader>gs', '<cmd>FzfLua git_status<CR>', desc = 'Status' },
@@ -33,7 +34,7 @@ return {
 			{ '<leader>sC', '<cmd>FzfLua commands<cr>', desc = 'Commands' },
 			{ '<leader>sd', '<cmd>FzfLua diagnostics_document<cr>', desc = 'Document Diagnostics' },
 			{ '<leader>sD', '<cmd>FzfLua diagnostics_workspace<cr>', desc = 'Workspace Diagnostics' },
-			{ '<leader>sg', function() fzf.live_grep({ cwd = root }) end, desc = 'Grep (Root Dir)', },
+			{ '<leader>sg', function() require('fzf-lua').live_grep({ cwd = root() }) end, desc = 'Grep (Root Dir)', },
 			{ '<leader>sG', '<cmd>FzfLua live_grep<cr>', desc = 'Grep (cwd)' },
 			{ '<leader>sh', '<cmd>FzfLua help_tags<cr>', desc = 'Help Pages' },
 			{ '<leader>sH', '<cmd>FzfLua highlights<cr>', desc = 'Search Highlight Groups' },
@@ -44,9 +45,9 @@ return {
 			{ '<leader>sm', '<cmd>FzfLua marks<cr>', desc = 'Jump to Mark' },
 			{ '<leader>sR', '<cmd>FzfLua resume<cr>', desc = 'Resume' },
 			{ '<leader>sq', '<cmd>FzfLua quickfix<cr>', desc = 'Quickfix List' },
-			{ '<leader>sw', function() fzf.grep_cword({ cwd = root }) end, desc = 'Word (Root Dir)', },
+			{ '<leader>sw', function() require('fzf-lua').grep_cword({ cwd = root() }) end, desc = 'Word (Root Dir)', },
 			{ '<leader>sW', '<cmd>FzfLua grep_cword<cr>', desc = 'Word (cwd)' },
-			{ '<leader>sw', function() fzf.grep_visual({ cwd = root }) end, mode = 'v', desc = 'Selection (Root Dir)', },
+			{ '<leader>sw', function() require('fzf-lua').grep_visual({ cwd = root() }) end, mode = 'v', desc = 'Selection (Root Dir)', },
 			{ '<leader>sW', '<cmd>FzfLua grep_visual<cr>', mode = 'v', desc = 'Selection (cwd)' },
 			{ '<leader>ss', '<cmd>FzfLua lsp_document_symbols<cr>', desc = 'Goto Symbol' },
 			{ '<leader>sS', '<cmd>FzfLua lsp_live_workspace_symbols<cr>', desc = 'Goto Symbol (Workspace)' },
