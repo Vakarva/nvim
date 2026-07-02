@@ -3,7 +3,17 @@ return {
     event = { 'BufReadPre', 'BufNewFile' },
     config = function()
         local lint = require('lint')
-        local is_spec = require('util.openapi').is_spec
+
+        -- True if the buffer looks like an OpenAPI/Swagger doc
+        -- (top-level `openapi:` / `swagger:` key near the top)
+        local function is_spec(bufnr)
+            for _, line in ipairs(vim.api.nvim_buf_get_lines(bufnr, 0, 20, false)) do
+                if line:match('^%s*"?openapi"?%s*:') or line:match('^%s*"?swagger"?%s*:') then
+                    return true
+                end
+            end
+            return false
+        end
 
         lint.linters_by_ft = {
             dockerfile = { 'hadolint' },
