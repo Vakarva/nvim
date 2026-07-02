@@ -1,4 +1,7 @@
-require('vim._core.ui2').enable()
+-- Experimental message UI; private module, so guard against it moving in a future release
+pcall(function()
+    require('vim._core.ui2').enable()
+end)
 
 -- Display Settings
 vim.opt.colorcolumn = '121' -- Visual guide at 120 characters
@@ -39,12 +42,3 @@ vim.opt.incsearch = true -- Show matches while typing search
 -- Windows
 vim.opt.splitright = true -- New vertical splits open to the right
 vim.opt.splitbelow = true -- New horizontal splits open below
-vim.api.nvim_create_autocmd('BufWinEnter', {
-    pattern = '*',
-    callback = function()
-        if vim.bo.buftype == 'help' then
-            vim.cmd('wincmd L')
-        end
-    end,
-    desc = 'Move help windows to the right side',
-})
