@@ -22,7 +22,4 @@ return {
             vim.g.db_ui_execute_on_save = false
         end,
     },
-    {
-        'kristijanhusak/vim-dadbod-completion',
-    },
 }
