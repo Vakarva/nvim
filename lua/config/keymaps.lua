@@ -55,7 +55,7 @@ vim.keymap.set('n', '<leader>xl', function()
     end
 end, { desc = 'Location List' })
 
--- Move lines up/down with Alt+j/k (works across all modes)
+-- Move lines up/down with Ctrl+Shift+j/k (works across all modes)
 vim.keymap.set('n', '<C-S-j>', "<cmd>execute 'move .+' . v:count1<cr>==", { desc = 'Move Down' })
 vim.keymap.set('n', '<C-S-k>', "<cmd>execute 'move .-' . (v:count1 + 1)<cr>==", { desc = 'Move Up' })
 vim.keymap.set('i', '<C-S-j>', '<esc><cmd>m .+1<cr>==gi', { desc = 'Move Down' })
@@ -91,9 +91,9 @@ vim.keymap.set('n', '<leader><tab>[', '<cmd>tabprevious<cr>', { desc = 'Previous
 -- Text manipulation
 vim.keymap.set(
     'n',
-    '<leader>s',
+    '<leader>S',
     [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
-    { desc = 'Search and replace word under cursor' }
+    { desc = 'Substitute word under cursor (buffer-wide)' }
 )
 -- vim.keymap.set('n', '<leader>x', '<cmd>!chmod +x %<CR>', { silent = true, desc = 'Make current file executable' })
 
@@ -103,7 +103,7 @@ vim.keymap.set('i', '.', '.<C-g>u')
 vim.keymap.set('i', ';', ';<C-g>u')
 
 -- Windows
-vim.keymap.set('n', '<leader>-', '<C-W>s', { desc = 'Split Window Below', remap = true })
+vim.keymap.set('n', '<leader>_', '<C-W>s', { desc = 'Split Window Below', remap = true })
 vim.keymap.set('n', '<leader>|', '<C-W>v', { desc = 'Split Window Right', remap = true })
 vim.keymap.set('n', '<leader>wd', '<C-W>c', { desc = 'Delete Window', remap = true })
 vim.keymap.set('n', '<C-Up>', '<cmd>resize +2<cr>', { desc = 'Increase Window Height' })
