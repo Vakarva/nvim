@@ -19,6 +19,7 @@ return {
             dockerfile = { 'hadolint' },
             markdown = { 'markdownlint-cli2' },
             rust = { 'clippy' },
+            terraform = { 'tflint', 'trivy' },
         }
 
         local markdownlint = lint.linters['markdownlint-cli2']

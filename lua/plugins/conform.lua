@@ -65,6 +65,8 @@ return {
             ['markdown.mdx'] = { 'prettierd', 'markdownlint-cli2', 'markdown-toc' },
             python = { 'ruff_fix', 'ruff_organize_imports', 'ruff_format' },
             rust = { 'rustfmt' },
+            terraform = { 'tofu_fmt' },
+            ['terraform-vars'] = { 'tofu_fmt' },
             typescript = { 'biome', 'biome-organize-imports' },
             typescriptreact = { 'biome', 'biome-organize-imports' },
             yaml = { 'prettierd' },
