@@ -2,7 +2,7 @@
 -- everything installed through mason (mason-lspconfig or mason-tool-installer)
 --
 -- Organize imports via gopls before saving Go files.
--- Formatting (with gofumpt) is handled by conform's LSP fallback.
+-- Formatting runs through golangci-lint first, then gopls/gofumpt.
 vim.lsp.config('gopls', {
     settings = {
         gopls = {
