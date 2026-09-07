@@ -18,5 +18,6 @@ vim.filetype.add({
     pattern = {
         ['.*/templates/.*%.ya?ml'] = { helm_template, { priority = 100 } },
         ['.*/templates/.*%.tpl'] = { helm_template, { priority = 100 } },
+        ['.+%.dockerignore'] = { 'gitignore', { priority = 100 } },
     },
 })

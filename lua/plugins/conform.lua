@@ -55,6 +55,7 @@ return {
             bash = { 'beautysh' },
             c = { 'clang-format' },
             css = { 'biome' },
+            go = { 'golangci-lint', lsp_format = 'last' },
             html = { 'biome' },
             javascript = { 'biome', 'biome-organize-imports' },
             javascriptreact = { 'biome', 'biome-organize-imports' },

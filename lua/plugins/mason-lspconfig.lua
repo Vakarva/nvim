@@ -25,7 +25,7 @@ return {
             'ruff',
             'rust_analyzer',
             'tofu_ls',
-            'tsgo',
+            'tsc',
             'ty',
             'yamlls',
             'zls',

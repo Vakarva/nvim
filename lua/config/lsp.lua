@@ -1,5 +1,8 @@
 -- Servers are enabled by mason-lspconfig's automatic_enable, which covers
 -- everything installed through mason (mason-lspconfig or mason-tool-installer)
+--
+-- Organize imports via gopls before saving Go files.
+-- Formatting (with gofumpt) is handled by conform's LSP fallback.
 vim.lsp.config('gopls', {
     settings = {
         gopls = {
@@ -13,8 +16,6 @@ vim.lsp.config('gopls', {
     },
 })
 
--- Organize imports via gopls before saving Go files.
--- Formatting (with gofumpt) is handled by conform's LSP fallback.
 vim.api.nvim_create_autocmd('BufWritePre', {
     pattern = '*.go',
     callback = function(e)
